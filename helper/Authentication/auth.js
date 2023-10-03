@@ -3,7 +3,21 @@ const nodemailer = require("nodemailer");
 const jwtConfig = require("../../config/jwtConfig")
 const jwt = require('jsonwebtoken');
 
+const myFollowers = async (req, res) => {
+  try {
+    const idArray = req.body.idArray; // Assuming the array of IDs is sent in the request body
 
+    // Use the $in operator to find documents with IDs in the idArray
+    const followers = await Users.find({ _id: { $in: idArray } });
+
+    // Do something with the found followers
+    res.status(200).json({ followers });
+  } catch (error) {
+    // Handle errors
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  } 
+}
 
 const myProfile = (req, res) => {
   Users.findById(req.params.id)
@@ -251,4 +265,4 @@ const signIn = (req, res) => {
   })
 }
 
-module.exports = { signIn, verify, signUp, requestSend, addFriend, myProfile }
+module.exports = { signIn, verify, signUp, requestSend, addFriend, myProfile, myFollowers }
