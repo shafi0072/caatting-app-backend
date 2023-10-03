@@ -224,7 +224,7 @@ const signIn = (req, res) => {
     } else {
       if (user.validPassword(req.body.password)) {
         return res.status(201).json({
-          accessToken: jwtConfig(user.fullName, user.email),
+          accessToken: jwtConfig(user._id,user.fullName, user.email),
           message: "success" ,
         });
       } else {

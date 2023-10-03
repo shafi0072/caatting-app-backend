@@ -1,11 +1,13 @@
 const jwt = require("jsonwebtoken");
 
 const jwtConfig = (
+  userId,
   fullName,
   email,
   password,
 ) => {
   const payload = {
+    userId:userId,
     fullName: fullName,
     email: email,
     password: password,
