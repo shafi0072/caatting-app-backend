@@ -1,5 +1,5 @@
 const express = require('express');
-const { verify, signIn, signUp, requestSend, follower, addFriend } = require('../../helper/Authentication/auth');
+const { verify, signIn, signUp, requestSend, addFriend, myProfile } = require('../../helper/Authentication/auth');
 const router = express.Router();
 
 
@@ -9,5 +9,5 @@ router.post('/verify', verify);
 router.post('/signIn', signIn);
 router.put('/request-send', requestSend);
 router.put('/addFriend', addFriend)
-
+router.get('/myProfile/:id', myProfile)
 module.exports = router

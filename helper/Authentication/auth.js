@@ -3,6 +3,21 @@ const nodemailer = require("nodemailer");
 const jwtConfig = require("../../config/jwtConfig")
 const jwt = require('jsonwebtoken');
 
+
+
+const myProfile = (req, res) => {
+  Users.findById(req.params.id)
+  .then((user) => {
+    if(user){
+      res.status(200).json(user)
+    }
+    else{
+      res.status(500).json({message:'not found'})
+    }
+  })
+  .catch(err => res.status(500).json({message:'server error'}))
+}
+
 const addFriend = async (req, res) => {
   const { userId, friendId, action } = req.body; // Assuming you pass userId, friendId, and action in the request body
 
@@ -236,4 +251,4 @@ const signIn = (req, res) => {
   })
 }
 
-module.exports = { signIn, verify, signUp, requestSend, addFriend }
+module.exports = { signIn, verify, signUp, requestSend, addFriend, myProfile }
